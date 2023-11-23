@@ -13,23 +13,30 @@ class lead_crawler:
         self.fill_color = "green"
         self.control_input = "none"
 
-    def move_forward():
+    def move_forward(self, dt):
         print()
 
-    def move_backwards():
+    def move_backwards(self, dt):
         print()
 
-    def rotate_left():
+    def rotate_left(self, dt):
         print()
 
-    def rotate_right():
+    def rotate_right(self, dt):
         print()
 
     def update_position(self, dt):
-        print()
+        if self.control_input == "forward":
+            self.move_forward()
+        elif self.control_input == "back":
+            self.move_backwards()
+        elif self.control_input == "left":
+            self.rotate_left()
+        elif self.control_input == "right":
+            self.rotate_right()
 
     def apply_control_input(self, user_input):
-        print(user_input)
+        self.control_input = user_input
 
 
 class follower_crawler:
