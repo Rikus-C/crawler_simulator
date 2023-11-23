@@ -7,7 +7,7 @@ class crawler_simuloator_app:
         self.master = master
         master.title("Crawler Control Simulator")
 
-        self.canvas = tk.Canvas(master, width=400, height=400)
+        self.canvas = tk.Canvas(master, width = 1000, height=1000)
         self.canvas.pack()
 
         # Bind arrow key events to the user_inputs method
@@ -20,16 +20,16 @@ class crawler_simuloator_app:
         # list off all crawlers present in simulation
         self.lead_crawler = None
         self.follower_crawlers = []
-        self.delta_t = 50
+        self.delta_t = 50 # milliseconds
 
         # Set the focus to the canvas so that it can receive keyboard events
         self.canvas.focus_set()
 
     def run_simulation(self):
-        self.lead_crawler.update_position(self.delta_t)
+        self.lead_crawler.update_position(self, self.delta_t)
         
         for crawler in self.follower_crawlers:
-            crawler.update_position(self.delta_t)
+            crawler.update_position(self, self.delta_t)
 
     def start_simulation(self):
         # Call the update_simulation method after the specified simulation_rate
@@ -49,7 +49,7 @@ class crawler_simuloator_app:
         elif key == "space":
             self.lead_crawler.apply_control_input("none")
 
-    def add_fllower_crawler(self, crawler):
+    def add_follower_crawler(self, crawler):
         self.follower_crawlers.append(crawler)
 
     def add_lead_crawler(self, crawler):
@@ -57,21 +57,21 @@ class crawler_simuloator_app:
 
 def main():
     root = tk.Tk()
-    simulator = crawler_simuloator_app(root)
+    scene = crawler_simuloator_app(root)
 
     # define crawlers to simulation
-    lead = lead_crawler(0, 0, 0, 0, 0, 0, 0)
-    follow_1 = follower_crawler(0, 0, 0, 0, 0, 0, 0)
+    lead = lead_crawler(scene, 500, 400, 0, 150, 200, 10, 10)
+    # follow_1 = follower_crawler(scene, 500, 600, 0, 200, 200, 10, 10)
 
     # add crawlers to simulation
-    simulator.add_lead_crawler(lead)
-    simulator.add_fllower_crawler(follow_1)
+    scene.add_lead_crawler(lead)
+    # scene.add_follower_crawler(follow_1)
 
-    if (len(simulator.follower_crawlers) < 1):
-        print("No crawlers in scene to simulate")
-        return
+    # if (len(scene.follower_crawlers) < 1):
+    #     print("No crawlers in scene to simulate")
+    #     return
 
-    simulator.start_simulation()
+    scene.start_simulation()
     root.mainloop()
 
 if __name__ == "__main__":
