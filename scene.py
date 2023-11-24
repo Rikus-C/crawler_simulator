@@ -20,7 +20,7 @@ class crawler_simuloator_app:
         # list off all crawlers present in simulation
         self.lead_crawler = None
         self.follower_crawlers = []
-        self.delta_t = 50 # milliseconds
+        self.delta_t = 20 # milliseconds
 
         # Set the focus to the canvas so that it can receive keyboard events
         self.canvas.focus_set()
@@ -60,7 +60,7 @@ def main():
     scene = crawler_simuloator_app(root)
 
     # define crawlers to simulation
-    lead = lead_crawler(scene, 500, 400, 0, 150, 200, 10, 10)
+    lead = lead_crawler(scene, 500, 500, 0, 100, 200, 10, 5)
     # follow_1 = follower_crawler(scene, 500, 600, 0, 200, 200, 10, 10)
 
     # add crawlers to simulation
